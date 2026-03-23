@@ -34,18 +34,40 @@
 ### Penalty Graph Code Part.1
 <img width="741" height="660" alt="Image" src="https://github.com/user-attachments/assets/65294fcc-73eb-42c5-bfe4-af6edc4a634c" />
 
-*
+* To create the `Goal` i definded both dimentions with `width` and `height`.
+* I created a variable to shortcut the initialsation of both `figure (fig)` and `subplot axes(ax)`, using `plt.subplots(figsize=(12,6))` to set the size.
+* I then created a variable called `goal_lines` to store the stylings & location for the lines to be drawn. I used 3 seperate `plt.Line2D` function. In the function i placed the plot locations inside `[]` and used the `width` & `height` variables:
+    * I started with the top line. `[0, width]` *Starts on the left side then moves to right to the value of width*, `[height, height]` *both left and right points start at the value of the variable)*). I styled the line with by making the `color='black'` and the thickened the line width with `lw=4`.
+    *  I then followed with the left line. `[0,0]` *Places both points on ther left handside.*,`[0,height]` *Starting on the lefthand side and only going upto the variable value*. The stylings were the same as the top line.
+    *  I finished with the right side line. `[width, width]` *Is the same as the left line but uses the `width` variable to as its starting and finishing location*, `[0,height]` is the same as the left line as well as the stlyings.
+* I then used a `For Loop` to add the line using `ax.add_line(line)`.
+* I added a horizontal line to represent the goal line using `ax.axhline(0, color='black', lw=1)`.
+* To store the `penalties scored` data, i created a variable called `goals`. In `[]` in plotted the location of the goals `(0,16, 3.2), (10,3)`. Underneathe i created a variable to label the goals with the location, match and season `[(A) England (24/25)`.
+* I did the same thing but for the penalties the were `saved`.
+* I then plotted both `goals` and `saves` using `ax.scatter()`. In the function i used `*zip(*goals)`, which combines multiple iterables together *(lists,strings)*. I then styled with `color='red/green` and `label = "Goals"/"Saves"` as well as `zorder= ` to determine what level of the graph it is placed.
+* I then created a variable to offset the labels for the goals so that it would sit right on the output. I placed them in both `[]` then inside `()`. 
 
 ### Penalty Graph Code Part.2
 <img width="567" height="792" alt="Image" src="https://github.com/user-attachments/assets/8e6ed99b-d560-46c5-83cf-762e1a0613bf" />
 
-*
+* To annotate each point i used a `For Loop` calling `point`, `label` and `offset` and used `zip()` calling the `goals`, `goals_label` and `goals_offset` variables. To plot them i used `ax.annotate()`:
+     * The first call the `label` for each point.
+     * Next I index the points inside `()`.
+     * Using `textcoords="offset points"` to specify the text positions.
+     * I also used `xytext=offset`, to specify the offset from the annotated point.
+     * `ha='center' aligns the position of the text.
+     * I then styled the point and text with `fontsize=10`, `color=green` and `fontweight = 'bold'`
+* I set limits for both the x&y axis with `ax.set_xlim() / y_lim()`. and set the values to define the visible range of data for both axes.
+* Any ticks outside the graph were removed with `ax.set_xticks() / y_ticks(), and placed and empty `[]` inside.
+* The `title` was set with `ax.set_title()`, the text was placed inside with stylings.
+* I placed the legend by using the `ax.legend()` function.
+* Finally is used `plt.show()` to display the graph.
 
 ### Penalty Shot Locations Graph Output
 <img width="875" height="456" alt="Image" src="https://github.com/user-attachments/assets/4d847216-721c-4cfa-b1d0-dcd5b257f3e2" />
 
-* The ouput shows that Kelleher has quick reactions and judgement when the ball is low and or central.
-* The least likely saves are made when the ball is placed at the side of the goal, a notoriously difficult save to make unless timed well.
+* The ouput shows that Kelleher has `quick reactions` and judgement when the ball is low and or central.
+* The `least likely saves` are made when the ball is placed at the `side of the goal`, a notoriously difficult save to make unless timed well.
 
 ------------
 
@@ -62,16 +84,26 @@
 --------
 
 ## Saves & Percentages
-### Saves & Percentages DataFrame
-<img width="1405" height="674" alt="Image" src="https://github.com/user-attachments/assets/803c9e80-4da9-415e-8d7e-5bb91e4a4071" />
-
-*
 
 ## Saves & Percentages Graph
 ### Saves & Percentages Graph Code
 <img width="871" height="725" alt="Image" src="https://github.com/user-attachments/assets/3480b6b2-e77e-417d-bfcc-15dbe3bb66b3" />
 
-*
+* I created a variable to hold the values that would `label` each slice of the graph. Inside `[]` I wrote the `opponent` , `location` then `\n` to drop the text down onto a new level, followed by `shots faced` and the number in `()` and `goals` in `()`.
+* The values for each slice was then placed into a variable, `values`, inside `[]`.
+* To then plot the chart I:
+    * Used `plt.figure()` and then plotted the `figsize()`
+    * I also called `wedges`, `texts` and `autotexts` as these are needed to manipulate the chart to show the data.
+    * The chart is plotted with `plt.pie()`
+    * In this, I called the `values` variable to add the data to the slices.
+    * Next is `labels=fixtures` to plot the text outside of the slices.
+    * I used `explode` to seperate the lowest value from the rest of the chart to highlight it.
+    * To show the percentage I used `autopct` with a `lambda` function, which is a one time function. Inside tihis i used a `f string` that calucated the percentage by using the `values` column and limit the outcome to 1 decimal place with `.1f`.
+    * I placed the `startangle` at `90` to rotate the chart allowing all the text to sit comfortably.
+    * Fianlly i styled the text with `textprops()` and changed the `fontsize` and `weight` of the font.
+* I set the title with `plt.title()` followed by text and stylings.
+* I adjusted the spacing on the graph with `plt.tight_layout()`.
+* Finally displayed the chart with `plt.show()`.
 
 ### Saves & Percentages Graph Output
 <img width="1023" height="706" alt="Image" src="https://github.com/user-attachments/assets/b0c8896a-34e4-4d57-a2ee-7176015a415f" />
@@ -82,16 +114,12 @@
 ---------
 
 ## Shots On Target Allowed & Goals Allowed
-### Shots On Target Allowed & Goals Allowed DataFrame
-<img width="833" height="399" alt="Image" src="https://github.com/user-attachments/assets/775cd61b-3bd1-4211-b23e-82152ebe9592" />
-
-*
 
 ## Shots On Target Allowed & Goals Allowed Graph
 ### Shots On Target Allowed & Goals Allowed Graph Code
 <img width="829" height="731" alt="Image" src="https://github.com/user-attachments/assets/3691cd0e-0403-4345-a494-4fa1e7a14cce" />
 
-*
+* 
 
 ### Shots On Target Allowed & Goals Allowed Graph Output
 <img width="913" height="530" alt="Image" src="https://github.com/user-attachments/assets/9f4221c3-2ed5-4263-850a-a0156d50754e" />
@@ -109,7 +137,7 @@
 ### PSxG Graph Code
 <img width="709" height="623" alt="Image" src="https://github.com/user-attachments/assets/4db6151a-eaf0-4866-bd70-76b6fb91cc95" />
 
-*
+* Same syntax as `Saves & Percentages` just with changed values.
 
 ### PSxG Graph Output
 <img width="1017" height="699" alt="Image" src="https://github.com/user-attachments/assets/3e99e6bf-450e-4c66-acb2-a36ff3aa1733" />
@@ -150,7 +178,7 @@
 ### Pass And Throw Graph Code
 <img width="842" height="747" alt="Image" src="https://github.com/user-attachments/assets/30b7e8b1-a9d2-48da-b87d-547aefe8a08b" />
 
-*
+* Same syntax as `Shots On Target Allowed & Goals Allowed`, changing the data columns to  `Pass` and `Throw`.
 
 ### Pass And Throw Graph Output
 <img width="920" height="526" alt="Image" src="https://github.com/user-attachments/assets/ce6fa4ab-e93f-4185-a1af-b0dc53b16dcf" />
@@ -165,7 +193,7 @@
 ### Distribution AVG Length Graph Code
 <img width="712" height="607" alt="Image" src="https://github.com/user-attachments/assets/b75b913e-e1d4-41d4-a5aa-c804f41a648a" />
 
-*
+* Same syntax as `Goal Kick AVG Length`, with column changed the `G.K AVG Length`.
 
 ### Distribution AVG Length Output
 <img width="716" height="636" alt="Image" src="https://github.com/user-attachments/assets/e5b762c8-804b-4b30-8ac1-2fe0f198f0d4" />
