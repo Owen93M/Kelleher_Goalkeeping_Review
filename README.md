@@ -83,8 +83,6 @@
 
 --------
 
-## Saves & Percentages
-
 ## Saves & Percentages Graph
 ### Saves & Percentages Graph Code
 <img width="871" height="725" alt="Image" src="https://github.com/user-attachments/assets/3480b6b2-e77e-417d-bfcc-15dbe3bb66b3" />
@@ -113,13 +111,28 @@
 
 ---------
 
-## Shots On Target Allowed & Goals Allowed
-
 ## Shots On Target Allowed & Goals Allowed Graph
 ### Shots On Target Allowed & Goals Allowed Graph Code
 <img width="829" height="731" alt="Image" src="https://github.com/user-attachments/assets/3691cd0e-0403-4345-a494-4fa1e7a14cce" />
 
-* 
+* I started by creating 3 variables that took the data from columns in the Data Frame. `Fixture` for the `x-axis ticks` & `SoTA` & `GA` for both the bars.
+* I then created a variable `x` to store the numerical positioning for each fixture, making the sit in the correct ortder.
+* A variable was created `bar_width`, to add a value to how big each bar shown should be.
+* I then set thee `figsize` using `plt.subplots()` function inside `fig` and `ax` variables.
+* Both bars were placed in to seperatate variables `bars1 / 2`. Then using `ax.bar()` function I used:
+   * `x` variable to get the fixture data to the `x-axis`. Then using `- / +`, this sperates the bars to sit `next to` eachother `not on top`. Finally i used the `bar_width` variable followed by `/ 2` to move the bar `left / right` of the center.
+   * I then called `shots_on_target \ goals_against` variable so the bar can use the data to present.
+   * To set the width of the bar I used a variable `width=` and called the `bar_width` variable created before to input the size required.
+   * I set the `label=` and added text to the variable, this then shows in the `legend` what bar is showing which data.
+   * `color` set both with text `red` and with `hex color code (#)`, the also `alpha=` to change the hue of the color.
+* Labels were adding the bars using `ax.bar_label()`. Then i called the bars `bars1 / 2`, with `label_type` to position the values, changed `fontsize=`, `color=` & `fontweight=`.
+* The x-label ticks were set using `ax.set_xticks()`, calling the `x` variable made previously to get the values.
+* To style the `x_ticks`, I used `ax_xtickslabels()` calling the `fixtures` variable, changing angle with `rotation=`, and moving the text along the horizontal axis I used `ha=right`.
+* To plot the title and y_label I used `ax.set_ylabel / set_title()`, wrote the text desired and styled with `fontweight='bold'`.
+* I changed the background color with `ax.set_facecolor()` with a `hex color code (#)'.
+* The legend was plotted with `ax.legend()`
+* Spacing was adjusted with `plt.tight_layout()`
+* I finally displayed the graph with `plt.graph()`
 
 ### Shots On Target Allowed & Goals Allowed Graph Output
 <img width="913" height="530" alt="Image" src="https://github.com/user-attachments/assets/9f4221c3-2ed5-4263-850a-a0156d50754e" />
@@ -131,7 +144,7 @@
 ### PSxG Code
 <img width="362" height="295" alt="Image" src="https://github.com/user-attachments/assets/06bcea67-11e7-4b5c-a76a-f9997f7dba70" />
 
-*
+* I indexed the code to find specific data that i required. I created a variable `psxg` and called the Data Frame. I grouped the data using `.groupby()` function then called the column `'Fixture'`. I then placed another column in `[PSxG]` and summed that column with the `.sum()` function.
 
 ## PSxG Graph
 ### PSxG Graph Code
@@ -147,21 +160,29 @@
 --------------
 
 ## Goal Kick AVG Length
-### Goal Kick AVG Length DataFrame
-<img width="1381" height="656" alt="Image" src="https://github.com/user-attachments/assets/fbe3f4bd-85d3-411f-9a3b-6969992973cd" />
-
-*
 
 ### Goal Kick AVG Length `mean()` Code
 <img width="349" height="129" alt="Image" src="https://github.com/user-attachments/assets/3cb4ef34-69b4-4fa1-8d40-45d7fbef8d62" />
 
-*
+* I created a variable `gk_mean`. I called the Data Frame and selected a column in `['G.K Avg Length']` then used the `mean()` fucntion the find the mean of all the values. 
 
 ## Goal Kick AVG Length Graph
 ### Goal Kick AVG Length Graph Code
 <img width="694" height="718" alt="Image" src="https://github.com/user-attachments/assets/d1f1306e-13fa-4bff-a748-3c312c120a90" />
 
-*
+* I set the figure size using `plt.figure()` function followed with `figsize=(9,7)`.
+* A variable was made to plot the axes with `plt.axes()` function.
+* To store the fixtures data is created a variable and i called the Data Frame with the column required `['Fixture']`.
+* The background color was changed with `ax.set_facecolor(#)` with a `hex color code`.
+* To plot the line, i used the `plt.plot()` function. I called the Data Frame and column desired for both the x & y axis `['Fixture'] & ['G.K Avg Length']`, the line was style with `'o--k'`, the `o` is the markers, `--` makes the line dotted & `k` changes the color to black.
+* To show the `AVG line` I plotted the line with `plt.axhline`(axis horizontal line) function. Inside the brackets I created a variable for the `y-axis (y)` and assigned it the value from the `gk_mean` variable previously made. I then styled the line with `color=`, `linestyle=`(dotted / dashed) and the `linewidth=` (by numerical value).
+* I wanted to highlight specific points & to do this :
+   * I created new variable `tp_mk=`,this is to highlight the highest point, i then followed it up with the numberical value by counting from left to right, starting at 0, to where the marker appears on the graph `(4)`.
+   * After i used `plt.scatter()`  and used the `fixtures` with `iloc` & the `tp_mk` variable to select the values needed along the `x-axis` & did the same by retrieving the column from the Data Frame `['G.K Avg Length']` for the `y-axis`. I changed the marker for this select point to a star using `marker='*'`, the size was changed with `s=300`, color was changed to yellow `color='yellow`, the color of the edge of the marker was changed with `edgecolor='w'` and the level it was presented was moved with `zorder=5`. 
+   * This process was then repeated for the two lowest points.
+* The x & y axis labels and title were added with  `plt.xlabel() / ylabel() / title()`, followed by text and then text stylings.
+* The ``x-axis ticks were rearranged to fit using `plt.xticks()`. I created a varaible called `ticks=` and called the Data Frame and column `['Fixture']`, then i created a `labels=` variable and called the fixtures` variable to retrieve the data,  the angle was change dwith `rotation=`, and the text was moved along the horizontal axis using `ha=right`.
+* Finally I wanted to show grid lines so i used `plt.grid(True)` to show them.
 
 ### Goal Kick AVG Length Graph Output
 <img width="716" height="644" alt="Image" src="https://github.com/user-attachments/assets/23053f32-9c19-44cb-9321-500447d8209b" />
@@ -171,8 +192,6 @@
     * The `highest point` indicates the opposite and that the team was pushed high up, so long passes were optional to get past the defensive line.
 
 ---------------
-
-## Pass And Throw
 
 ## Pass And Throw Graph
 ### Pass And Throw Graph Code
